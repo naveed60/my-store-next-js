@@ -110,7 +110,7 @@ export function PrimaryHeader({
   return (
     <>
       <header className="sticky top-3 z-30 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 border border-transparent bg-white/90 px-4 py-4 shadow-lg transition sm:rounded-3xl sm:border-zinc-100">
+        <div className="mx-auto flex max-w-6xl items-center gap-4 border border-slate-800/70 bg-slate-900/97 px-4 py-4 shadow-[0_8px_40px_rgba(0,0,0,0.28)] transition sm:rounded-3xl">
           <Link
             href="/nextshop"
             className="flex items-center gap-3"
@@ -125,12 +125,12 @@ export function PrimaryHeader({
               className="h-12 w-12 object-contain"
             />
           </Link>
-          <nav className="hidden flex-1 items-center justify-center gap-6 text-sm text-zinc-400 sm:flex">
+          <nav className="hidden flex-1 items-center justify-center gap-6 text-sm text-slate-400 sm:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition hover:text-zinc-700"
+                className="transition hover:text-white"
               >
                 {link.label}
               </Link>
@@ -144,10 +144,10 @@ export function PrimaryHeader({
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1 font-semibold tracking-wide text-zinc-700 transition hover:text-zinc-900"
+                  className="flex items-center gap-1 font-semibold tracking-wide text-slate-200 transition hover:text-white"
                 >
                   {cat.label}
-                  <svg className="h-3 w-3 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="h-3 w-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -185,7 +185,7 @@ export function PrimaryHeader({
             <button
               type="button"
               onClick={toggleFavorites}
-              className="relative rounded-full border border-zinc-200 p-2 text-zinc-600 transition hover:border-zinc-400"
+              className="relative rounded-full border border-slate-700 p-2 text-slate-300 transition hover:border-slate-500 hover:bg-slate-800/60"
               aria-label="Favorites"
             >
               <Heart className={`h-5 w-5 transition ${favorites.length > 0 ? "fill-rose-500 text-rose-500" : ""}`} />
@@ -198,7 +198,7 @@ export function PrimaryHeader({
             <button
               type="button"
               onClick={toggleCart}
-              className="relative rounded-full border border-zinc-200 p-2 text-zinc-600 transition hover:border-zinc-400"
+              className="relative rounded-full border border-slate-700 p-2 text-slate-300 transition hover:border-slate-500 hover:bg-slate-800/60"
               aria-label="Open cart"
             >
               <ShoppingBag className="h-5 w-5" />
@@ -250,14 +250,14 @@ export function PrimaryHeader({
               <button
                 type="button"
                 onClick={handleSignIn}
-                className="hidden rounded-full border border-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 sm:block"
+                className="hidden rounded-full border border-slate-600 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-slate-400 hover:bg-slate-800 sm:block"
               >
                 Sign in
               </button>
             )}
             <button
               type="button"
-              className="rounded-2xl border border-zinc-200 p-2 text-zinc-600 transition hover:border-zinc-400 sm:hidden"
+              className="rounded-2xl border border-slate-700 p-2 text-slate-300 transition hover:border-slate-500 hover:bg-slate-800/60 sm:hidden"
               onClick={() => setSidebarOpen(true)}
               aria-label="Open menu"
             >
@@ -287,16 +287,16 @@ export function PrimaryHeader({
       />
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-72 transform flex-col border-r border-zinc-100 bg-white/90 p-6 shadow-2xl transition-transform",
+          "fixed inset-y-0 left-0 z-50 flex w-72 transform flex-col border-r border-slate-800 bg-slate-900 p-6 shadow-2xl transition-transform",
           sidebarOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="flex items-center justify-between">
-          <p className="font-semibold text-zinc-700">Categories</p>
+          <p className="font-semibold text-slate-300">Categories</p>
           <button
             type="button"
             onClick={() => setSidebarOpen(false)}
-            className="rounded-full border border-transparent p-2 text-zinc-500 hover:border-zinc-200"
+            className="rounded-full border border-transparent p-2 text-slate-400 hover:border-slate-700 hover:bg-slate-800"
             aria-label="Close menu"
           >
             <X className="h-5 w-5" />
@@ -310,24 +310,24 @@ export function PrimaryHeader({
                 onClick={() =>
                   setOpenSidebarCat(openSidebarCat === cat.label ? null : cat.label)
                 }
-                className="flex w-full items-center justify-between rounded-2xl px-3 py-3 font-semibold tracking-wide text-zinc-700 transition hover:bg-zinc-100"
+                className="flex w-full items-center justify-between rounded-2xl px-3 py-3 font-semibold tracking-wide text-slate-200 transition hover:bg-slate-800"
               >
                 {cat.label}
                 <ChevronDown
                   className={cn(
-                    "h-4 w-4 text-zinc-400 transition-transform duration-200",
+                    "h-4 w-4 text-slate-500 transition-transform duration-200",
                     openSidebarCat === cat.label && "rotate-180",
                   )}
                 />
               </button>
               {openSidebarCat === cat.label && (
-                <div className="ml-3 mt-1 space-y-0.5 border-l border-zinc-100 pl-3">
+                <div className="ml-3 mt-1 space-y-0.5 border-l border-slate-800 pl-3">
                   {cat.items.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setSidebarOpen(false)}
-                      className="block rounded-xl px-3 py-2.5 text-zinc-500 transition hover:bg-zinc-50 hover:text-zinc-900"
+                      className="block rounded-xl px-3 py-2.5 text-slate-400 transition hover:bg-slate-800 hover:text-white"
                     >
                       {item.label}
                     </Link>
@@ -341,16 +341,16 @@ export function PrimaryHeader({
           <div className="mt-8 flex items-center gap-3">
             <button
               type="button"
-              className="flex min-w-0 flex-1 items-center gap-3 rounded-[28px] border border-zinc-200 bg-white px-4 py-4 text-left text-zinc-900 shadow-sm transition hover:border-zinc-300 hover:shadow-md"
+              className="flex min-w-0 flex-1 items-center gap-3 rounded-[28px] border border-slate-700 bg-slate-800 px-4 py-4 text-left text-white shadow-sm transition hover:border-slate-600"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-500">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-600 bg-slate-700 text-slate-300">
                 <User className="h-6 w-6" />
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold">
                   {session?.user?.name ?? "Account"}
                 </p>
-                <p className="truncate text-xs text-zinc-500">
+                <p className="truncate text-xs text-slate-400">
                   {session?.user?.email}
                 </p>
               </div>
@@ -358,7 +358,7 @@ export function PrimaryHeader({
             <button
               type="button"
               onClick={handleSignOut}
-              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm transition hover:border-zinc-300 hover:shadow-md disabled:opacity-60"
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 shadow-sm transition hover:border-slate-600 disabled:opacity-60"
               aria-label="Sign out"
               disabled={signingOut}
             >
@@ -370,7 +370,7 @@ export function PrimaryHeader({
           <button
             type="button"
             onClick={handleSignIn}
-            className="mt-8 w-full rounded-2xl border border-zinc-200 px-4 py-3 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-50 sm:hidden"
+            className="mt-8 w-full rounded-2xl border border-slate-700 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-800 sm:hidden"
           >
             Sign in
           </button>
@@ -436,11 +436,11 @@ function HeaderSearchBox({
     <div className={cn("relative w-full", containerClassName)}>
       <div
         className={cn(
-          "flex items-center border border-zinc-200 bg-white px-4 py-2 text-sm",
+          "flex items-center border border-slate-700 bg-slate-800/80 px-4 py-2 text-sm text-white",
           fieldClassName
         )}
       >
-        <Search className="mr-3 h-4 w-4 text-zinc-400" />
+        <Search className="mr-3 h-4 w-4 text-slate-400" />
         <input
           value={value}
           onChange={(event) => {
@@ -488,13 +488,13 @@ function HeaderSearchBox({
           }}
           placeholder={placeholder}
           autoComplete="off"
-          className="flex-1 bg-transparent outline-none"
+          className="flex-1 bg-transparent outline-none placeholder:text-slate-400"
         />
         <button
           type="button"
           onClick={submitSearch}
           aria-label="Search products"
-          className="ml-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-700"
+          className="ml-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-700 hover:text-slate-200"
         >
           <Search className="h-4 w-4" />
         </button>
