@@ -9,6 +9,8 @@ import { useFavorites } from "@/components/providers/favorites-provider";
 import { useRouter } from "next/navigation";
 import { ProductModal } from "./product-modal";
 import { StorefrontProductCard } from "./storefront-product-card";
+import { Reveal } from "@/components/animations/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/animations/stagger-container";
 
 const CATEGORY_LABELS: Record<string, string> = {
   "men-un-stitch": "Men — Un-Stitch",
@@ -77,7 +79,9 @@ export function ProductGrid({ searchTerm, products }: ProductGridProps) {
         {featured.length > 0 && (
           <ProductSection title="Featured" subtitle="Hand-picked by our team">
             {featured.map((p) => (
-              <ProductCard key={p.id} product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              <StaggerItem key={p.id}>
+                <ProductCard product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              </StaggerItem>
             ))}
           </ProductSection>
         )}
@@ -85,7 +89,9 @@ export function ProductGrid({ searchTerm, products }: ProductGridProps) {
         {newArrivals.length > 0 && (
           <ProductSection title="New Arrivals" subtitle="Latest additions to the catalog">
             {newArrivals.map((p) => (
-              <ProductCard key={p.id} product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              <StaggerItem key={p.id}>
+                <ProductCard product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              </StaggerItem>
             ))}
           </ProductSection>
         )}
@@ -93,7 +99,9 @@ export function ProductGrid({ searchTerm, products }: ProductGridProps) {
         {Object.entries(byCategory).map(([cat, items]) => (
           <ProductSection key={cat} title={CATEGORY_LABELS[cat] ?? cat} subtitle={`${items.length} product${items.length === 1 ? "" : "s"}`}>
             {items.map((p) => (
-              <ProductCard key={p.id} product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              <StaggerItem key={p.id}>
+                <ProductCard product={p} addItem={addItem} status={status} router={router} isFavorite={isFavorite} toggleFavorite={toggleFavorite} onView={setSelectedProduct} />
+              </StaggerItem>
             ))}
           </ProductSection>
         ))}
@@ -109,13 +117,17 @@ export function ProductGrid({ searchTerm, products }: ProductGridProps) {
 function ProductSection({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
     <section className="space-y-6">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">{subtitle}</p>
-          <h2 className="text-2xl font-semibold text-zinc-900">{title}</h2>
+      <Reveal y={20} duration={0.5}>
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">{subtitle}</p>
+            <h2 className="text-2xl font-semibold text-zinc-900">{title}</h2>
+          </div>
         </div>
-      </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{children}</div>
+      </Reveal>
+      <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {children}
+      </StaggerContainer>
     </section>
   );
 }
